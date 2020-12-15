@@ -1,21 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import React, { useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import Lottery from "./app/screens/lottery.js";
+import * as Font from "expo-font";
+import AppLoading from "expo-app-loading";
+
+const getFont = () => {
+    return Font.loadAsync({
+        nanumpenB: require("./app/assets/fonts/NanumBarunpenB.ttf"),
+        nanumpenR: require("./app/assets/fonts/NanumBarunpenR.ttf"),
+    });
+};
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+    const [fontLoaded, setFontLoaded] = useState(false);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    if (fontLoaded) {
+        return <Lottery />;
+    } else {
+        return (
+            <AppLoading
+                startAsync={getFont}
+                onFinish={() => {
+                    setFontLoaded(true);
+                }}
+                onError={console.warn}
+            />
+        );
+    }
+
+    return <Lottery />;
+}
