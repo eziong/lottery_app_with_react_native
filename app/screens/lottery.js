@@ -92,15 +92,17 @@ export default function lotteryBox(props) {
                         );
                     }}
                 />
-                <TouchableOpacity
-                    style={drawing ? style.selectedBtn : style.selectBtn}
-                    onPress={clickHandler}
-                >
-                    {randomBtn()}
-                </TouchableOpacity>
-                <TouchableOpacity onPress={reset}>
-                    {resetBtn()}
-                </TouchableOpacity>
+                <View style={style.touchArea}>
+                    <TouchableOpacity
+                        style={drawing ? style.selectedBtn : style.selectBtn}
+                        onPress={clickHandler}
+                    >
+                        {randomBtn()}
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={reset}>
+                        {resetBtn()}
+                    </TouchableOpacity>
+                </View>
             </View>
         </View>
     );
@@ -140,7 +142,12 @@ function randomBtn(props) {
 function resetBtn(props) {
     return (
         <Image
-            style={{ width: 30, height: 30, marginLeft: "90%" }}
+            style={{
+                width: 30,
+                height: 30,
+                marginLeft: "20%",
+                marginTop: "30%",
+            }}
             source={reset}
         />
     );
@@ -184,24 +191,14 @@ const style = StyleSheet.create({
     },
     selectBtn: {
         width: "62%",
-        height: "8%",
+        height: "80%",
         backgroundColor: "rgba(206, 104, 21, 0.623)",
         borderRadius: 30,
         justifyContent: "center",
         alignItems: "center",
         borderWidth: 1,
         marginLeft: "20%",
-        marginBottom: "5%",
+        marginTop: "5%",
     },
-    selectedBtn: {
-        width: "62%",
-        height: "8%",
-        backgroundColor: "rgba(124, 104, 86, 0.623)",
-        borderRadius: 30,
-        justifyContent: "center",
-        alignItems: "center",
-        borderWidth: 1,
-        marginLeft: "20%",
-        marginBottom: "5%",
-    },
+    touchArea: { flex: 10, flexDirection: "row" },
 });
